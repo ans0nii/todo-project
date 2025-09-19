@@ -1,3 +1,11 @@
-import {hello} from "./homepage.js"
+import {sideBarButtons} from "./sidebar.js";
+import "./style.css";
 
-hello()
+
+
+
+
+
+
+
+sideBarButtons();
