@@ -1,42 +1,32 @@
 import {
   homeContent,
-  addTaskContent,
   toDoContent,
-  checkListContent,
   addTodayContent,
   addProjectContent,
+  clearContent,
 } from "./dom.js";
 
 function sideBarButtons() {
   function homeButton() {
     document.querySelector("#home-btn").addEventListener("click", (e) => {
+      clearContent();
       homeContent();
     });
   }
   homeButton();
 
-  function addTaskButton() {
-    document.querySelector("#add_task-btn").addEventListener("click", (e) => {
-      addTaskContent();
-    });
-  }
-  addTaskButton();
   function toDo() {
     document.querySelector("#todo-btn").addEventListener("click", (e) => {
+      clearContent();
       toDoContent();
     });
   }
   toDo();
 
-  function checkList() {
-    document.querySelector("#checklist-btn").addEventListener("click", (e) => {
-      checkListContent();
-    });
-  }
-  checkList();
 
   function today() {
     document.querySelector("#today-btn").addEventListener("click", (e) => {
+      clearContent();
       addTodayContent();
     });
   }
@@ -44,6 +34,7 @@ function sideBarButtons() {
 
   function projects() {
     document.querySelector("#projects-btn").addEventListener("click", (e) => {
+      clearContent();
       addProjectContent();
     });
   }

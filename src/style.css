@@ -2,9 +2,8 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 #sidebar-header{
-    width: 100%;
-    font-size: 23px;
-    border: solid 1px;
+    width: 10%;
+    font-size: 27px;
     font-weight: bold;
 }
 
@@ -14,7 +13,7 @@ body {
     width: 10%;
     height: 100vh;
     border: solid 1px;
-    margin-top: 2px;
+    margin-top: 5px;
     gap: 14px;
     background-color: #f0f0f0;
 }
@@ -40,6 +39,34 @@ body {
     bottom: -49px;
 }
 
+.layout {
+     width: 99%;
+    height: 98%;
+    margin: 5px;
+}
+
 .home-page{
     border: solid 2px;
+}
+
+#home-header{
+    display: flex;
+    justify-content: center;
+    font-size: 30px;
+    margin-top: 5px;
+}
+
+
+.toDo-content {
+    border: 2px solid purple;
+}
+
+
+
+.today-content {
+    border: 2px solid green;
+}
+
+.project-content {
+    border: 2px solid blue;
 }
