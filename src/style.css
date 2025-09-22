@@ -2,8 +2,9 @@ body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 #sidebar-header{
-    width: 10%;
+    width: 100%;
     font-size: 23px;
+    border: solid 1px;
     font-weight: bold;
 }
 
@@ -13,7 +14,7 @@ body {
     width: 10%;
     height: 100vh;
     border: solid 1px;
-    margin-top: 5px;
+    margin-top: 2px;
     gap: 14px;
     background-color: #f0f0f0;
 }
@@ -28,4 +29,17 @@ body {
 
 .btn:hover{
     background-color: #e3e3e3;
+}
+
+.content{
+    border: solid 2px pink;
+    width: 88.7%;
+    margin-left: 10.2%;
+    height: 99.8%;
+    position: absolute;
+    bottom: -49px;
+}
+
+.home-page{
+    border: solid 2px;
 }

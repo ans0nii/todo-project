@@ -1,46 +1,52 @@
-import { check } from "./dom.js";
+import {
+  homeContent,
+  addTaskContent,
+  toDoContent,
+  checkListContent,
+  addTodayContent,
+  addProjectContent,
+} from "./dom.js";
 
 function sideBarButtons() {
   function homeButton() {
     document.querySelector("#home-btn").addEventListener("click", (e) => {
-      check();
+      homeContent();
     });
   }
   homeButton();
 
   function addTaskButton() {
-    document.querySelector("#add-task-btn").addEventListener("click", (e) => {
-      check();
+    document.querySelector("#add_task-btn").addEventListener("click", (e) => {
+      addTaskContent();
     });
   }
   addTaskButton();
-
   function toDo() {
     document.querySelector("#todo-btn").addEventListener("click", (e) => {
-      check();
+      toDoContent();
     });
   }
   toDo();
 
   function checkList() {
     document.querySelector("#checklist-btn").addEventListener("click", (e) => {
-      check();
+      checkListContent();
     });
   }
   checkList();
 
   function today() {
     document.querySelector("#today-btn").addEventListener("click", (e) => {
-      check();
+      addTodayContent();
     });
   }
   today();
 
   function projects() {
     document.querySelector("#projects-btn").addEventListener("click", (e) => {
-      check();
+      addProjectContent();
     });
   }
   projects();
 }
-export { sideBarButtons }
+export { sideBarButtons };
