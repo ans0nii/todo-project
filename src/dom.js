@@ -1,6 +1,16 @@
+import { task } from "./task";
+let taskArray = [];
+
 function clearContent() {
   let content = document.querySelector(".content");
   content.innerHTML = " ";
+}
+
+function clearTask() {
+  let removeContainer = document.querySelector(".task-list");
+  if (removeContainer !== null) {
+    removeContainer.remove();
+  }
 }
 
 function homeContent() {
@@ -14,34 +24,36 @@ function homeContent() {
   header.textContent = "Welcome User!";
   homePage.appendChild(header);
   console.log("home");
+
+  let body = document.createElement("div");
+  body.id = "home-body";
+  body.textContent = "Here are your tasks for the day: ";
+  homePage.appendChild(body);
 }
 
 function toDoForms() {
   let toDoForm = document.createElement("form");
 
   let newTaskContent = document.createElement("div");
+  newTaskContent.classList.add("task-content");
 
   let toDoFormLabel = document.createElement("label");
   toDoFormLabel.textContent = "New Task: ";
   newTaskContent.appendChild(toDoFormLabel);
-
   let toDoFormInput = document.createElement("input");
+  toDoFormInput.id = "todo-input";
   toDoFormInput.type = "text";
   toDoFormInput.name = "title";
   newTaskContent.appendChild(toDoFormInput);
 
-  let toDoFormSubmit = document.createElement("button");
-  toDoFormSubmit.type = "submit";
-  toDoFormSubmit.textContent = "Add task";
-  newTaskContent.appendChild(toDoFormSubmit);
-
   let priorityContent = document.createElement("div");
+  priorityContent.classList.add("priority-content");
 
   let priorityLabel = document.createElement("label");
   priorityLabel.textContent = "Priority: ";
   priorityContent.appendChild(priorityLabel);
-
   let priorityInput = document.createElement("select");
+  priorityInput.id = "priority-input";
   let option1 = document.createElement("option");
   option1.textContent = "High";
   priorityInput.appendChild(option1);
@@ -53,20 +65,15 @@ function toDoForms() {
   priorityInput.appendChild(option3);
   priorityContent.appendChild(priorityInput);
 
-  let prioritySubmit = document.createElement("button");
-  prioritySubmit.type = "submit";
-  prioritySubmit.textContent = "Submit";
-  priorityContent.appendChild(prioritySubmit);
-
   let dateDueContent = document.createElement("div");
+  dateDueContent.classList.add("date-content");
   let dateDueLbl = document.createElement("label");
   dateDueLbl.textContent = "Date Due: ";
   dateDueContent.appendChild(dateDueLbl);
-
   let dateDueInput = document.createElement("input");
+  dateDueInput.id = "date-due_Input";
   dateDueInput.type = "date";
   dateDueContent.appendChild(dateDueInput);
-
   let dateDueSubmit = document.createElement("button");
   dateDueSubmit.type = "submit";
   dateDueSubmit.textContent = "Submit";
@@ -76,8 +83,59 @@ function toDoForms() {
   toDoForm.appendChild(priorityContent);
   toDoForm.appendChild(dateDueContent);
   console.log("form");
-
+  toDoForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let taskValue = toDoFormInput.value;
+    let priorityValue = priorityInput.value;
+    let dateValue = dateDueInput.value;
+    let newTask = new task(taskValue, priorityValue, dateValue);
+    taskArray.push(newTask);
+    displayTask(taskArray);
+    console.log(taskArray);
+  });
   return toDoForm;
+}
+
+function displayTask(taskArray) {
+  function clearTaskPage() {
+    clearTask();
+  }
+  function createTask() {
+    let content = document.querySelector(".toDo-content");
+    let taskParentContainer = document.createElement("div");
+    taskParentContainer.classList.add("task-list");
+    for (let i = 0; i < taskArray.length; i++) {
+      let taskContainer = document.createElement("div");
+      taskContainer.classList.add("task-container");
+      let task = taskArray[i];
+      let taskTitle = document.createElement("p");
+      taskTitle.textContent = task.task;
+      let taskPriority = document.createElement("span");
+      taskPriority.textContent = task.priority;
+
+      let taskDate = document.createElement("span");
+      taskDate.textContent = task.date;
+      taskContainer.appendChild(taskTitle);
+      taskContainer.appendChild(taskPriority);
+      taskContainer.appendChild(taskDate);
+      taskParentContainer.appendChild(taskContainer);
+    }
+
+    function taskBackground() {
+      switch (task.priority) {
+        case "High":
+          taskContainer.classList.add("high-background");
+          break;
+        case "Medium":
+          taskContainer.classList.add("medium-background");
+          break;
+        case "Low":
+          taskContainer.classList.add("low-background");
+          break;
+      }
+    }
+  }
+  content.appendChild(taskParentContainer);
 }
 
 function toDoContent() {
