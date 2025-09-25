@@ -1,5 +1,6 @@
 import { task } from "./task";
 let taskArray = [];
+loadLocal();
 
 function clearContent() {
   let content = document.querySelector(".content");
@@ -17,7 +18,7 @@ function homeContent() {
   header.textContent = "Welcome User!";
   homePage.appendChild(header);
   console.log("home");
-
+  
   let body = document.createElement("div");
   body.id = "home-body";
   body.textContent = "Here are your tasks for the day: ";
@@ -29,7 +30,7 @@ function toDoForms() {
 
   let newTaskContent = document.createElement("div");
   newTaskContent.classList.add("task-content");
-
+  
   let toDoFormLabel = document.createElement("label");
   toDoFormLabel.textContent = "New Task: ";
   newTaskContent.appendChild(toDoFormLabel);
@@ -38,10 +39,10 @@ function toDoForms() {
   toDoFormInput.type = "text";
   toDoFormInput.name = "title";
   newTaskContent.appendChild(toDoFormInput);
-
+  
   let priorityContent = document.createElement("div");
   priorityContent.classList.add("priority-content");
-
+  
   let priorityLabel = document.createElement("label");
   priorityLabel.textContent = "Priority: ";
   priorityContent.appendChild(priorityLabel);
@@ -57,7 +58,7 @@ function toDoForms() {
   option3.textContent = "Low";
   priorityInput.appendChild(option3);
   priorityContent.appendChild(priorityInput);
-
+  
   let dateDueContent = document.createElement("div");
   dateDueContent.classList.add("date-content");
   let dateDueLbl = document.createElement("label");
@@ -71,7 +72,7 @@ function toDoForms() {
   dateDueSubmit.type = "submit";
   dateDueSubmit.textContent = "Submit";
   dateDueContent.appendChild(dateDueSubmit);
-
+  
   toDoForm.appendChild(newTaskContent);
   toDoForm.appendChild(priorityContent);
   toDoForm.appendChild(dateDueContent);
@@ -83,6 +84,7 @@ function toDoForms() {
     let dateValue = dateDueInput.value;
     let newTask = new task(taskValue, priorityValue, dateValue);
     taskArray.push(newTask);
+    saveLocal();
     displayTask(taskArray);
     console.log(taskArray);
   });
@@ -105,27 +107,39 @@ function displayTask(taskArray) {
     taskTitle.textContent = toDo.title;
     let taskPriority = document.createElement("span");
     taskPriority.textContent = toDo.priority;
-
+    
     let taskDate = document.createElement("span");
     taskDate.textContent = toDo.date;
     taskContainer.appendChild(taskTitle);
     taskContainer.appendChild(taskPriority);
     taskContainer.appendChild(taskDate);
     taskParentContainer.appendChild(taskContainer);
-
+    
     switch (toDo.priority) {
       case "High":
         taskContainer.classList.add("high-background");
         break;
-      case "Medium":
-        taskContainer.classList.add("medium-background");
+        case "Medium":
+          taskContainer.classList.add("medium-background");
         break;
       case "Low":
         taskContainer.classList.add("low-background");
         break;
+      }
     }
+    content.appendChild(taskParentContainer);
   }
-  content.appendChild(taskParentContainer);
+  
+  function saveLocal(){
+  let stringedArray = JSON.stringify(taskArray);
+    localStorage.setItem("tasks", stringedArray);
+}
+
+function loadLocal(){
+  let saved = localStorage.getItem("tasks");
+  if (saved) {
+    taskArray = JSON.parse(saved);
+  }
 }
 
 function toDoContent() {
@@ -135,6 +149,9 @@ function toDoContent() {
   content.appendChild(toDo);
   let form = toDoForms();
   toDo.appendChild(form);
+  if (taskArray.length > 0) {
+  displayTask(taskArray);
+}
 }
 
 function addTodayContent() {
