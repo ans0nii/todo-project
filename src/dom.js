@@ -6,13 +6,6 @@ function clearContent() {
   content.innerHTML = " ";
 }
 
-function clearTask() {
-  let removeContainer = document.querySelector(".task-list");
-  if (removeContainer !== null) {
-    removeContainer.remove();
-  }
-}
-
 function homeContent() {
   let content = document.querySelector(".content");
   let homePage = document.createElement("div");
@@ -71,7 +64,7 @@ function toDoForms() {
   dateDueLbl.textContent = "Date Due: ";
   dateDueContent.appendChild(dateDueLbl);
   let dateDueInput = document.createElement("input");
-  dateDueInput.id = "date-due_Input";
+  dateDueInput.id = "date-due-input";
   dateDueInput.type = "date";
   dateDueContent.appendChild(dateDueInput);
   let dateDueSubmit = document.createElement("button");
@@ -97,42 +90,39 @@ function toDoForms() {
 }
 
 function displayTask(taskArray) {
-  function clearTaskPage() {
-    clearTask();
+  let removeContainer = document.querySelector(".task-list");
+  if (removeContainer !== null) {
+    removeContainer.remove();
   }
-  function createTask() {
-    let content = document.querySelector(".toDo-content");
-    let taskParentContainer = document.createElement("div");
-    taskParentContainer.classList.add("task-list");
-    for (let i = 0; i < taskArray.length; i++) {
-      let taskContainer = document.createElement("div");
-      taskContainer.classList.add("task-container");
-      let task = taskArray[i];
-      let taskTitle = document.createElement("p");
-      taskTitle.textContent = task.task;
-      let taskPriority = document.createElement("span");
-      taskPriority.textContent = task.priority;
+  let taskParentContainer = document.createElement("div");
+  taskParentContainer.classList.add("task-list");
+  let content = document.querySelector(".toDo-content");
+  for (let i = 0; i < taskArray.length; i++) {
+    let taskContainer = document.createElement("div");
+    taskContainer.classList.add("task-container");
+    let toDo = taskArray[i];
+    let taskTitle = document.createElement("p");
+    taskTitle.textContent = toDo.title;
+    let taskPriority = document.createElement("span");
+    taskPriority.textContent = toDo.priority;
 
-      let taskDate = document.createElement("span");
-      taskDate.textContent = task.date;
-      taskContainer.appendChild(taskTitle);
-      taskContainer.appendChild(taskPriority);
-      taskContainer.appendChild(taskDate);
-      taskParentContainer.appendChild(taskContainer);
-    }
+    let taskDate = document.createElement("span");
+    taskDate.textContent = toDo.date;
+    taskContainer.appendChild(taskTitle);
+    taskContainer.appendChild(taskPriority);
+    taskContainer.appendChild(taskDate);
+    taskParentContainer.appendChild(taskContainer);
 
-    function taskBackground() {
-      switch (task.priority) {
-        case "High":
-          taskContainer.classList.add("high-background");
-          break;
-        case "Medium":
-          taskContainer.classList.add("medium-background");
-          break;
-        case "Low":
-          taskContainer.classList.add("low-background");
-          break;
-      }
+    switch (toDo.priority) {
+      case "High":
+        taskContainer.classList.add("high-background");
+        break;
+      case "Medium":
+        taskContainer.classList.add("medium-background");
+        break;
+      case "Low":
+        taskContainer.classList.add("low-background");
+        break;
     }
   }
   content.appendChild(taskParentContainer);

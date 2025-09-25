@@ -1,11 +1,11 @@
 class task {
-  constructor(task, priority, date) {
-    this.task = task;
+  constructor(title, priority, date) {
+    this.title = title;
     this.priority = priority;
     this.date = date;
   }
   getTaskInfo() {
-    console.log(this.task, this.priority, this.date);
+    console.log(this.title, this.priority, this.date);
   }
 
 }
